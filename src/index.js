@@ -1,12 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+const query = `query { allLifts { name status } }`
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const url = "https://snowtooth.herokuapp.com";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const opts = {
+ method: "POST",
+ headers: {"Content-Type": "application/json"}, 
+ body: JSON.stringify({ query })
+}
+
+fetch(url, opts)
+.then( res => res.json())
+.then((data) => console.log('DATA', data));
